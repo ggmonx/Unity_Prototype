@@ -51,7 +51,11 @@ public class PlayerController : MonoBehaviour
             numJumps = 0;
             hasJumped = false;
         }
-        if (Input.GetKeyDown(KeyCode.Space) && numJumps < maxJumps)
+        else if (numJumps==0){ //walked off edge
+            numJumps+=1;
+        }
+        if ( (Input.GetKeyDown(KeyCode.Space)||Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) 
+        && numJumps < maxJumps)
         {
             anim.SetBool("Jumping?", true);
             numJumps += 1;
