@@ -14,7 +14,8 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer sr;
     public GameObject player;
     private Animator anim;
-
+    private float moveStopTime;
+    private bool canMove = true;
     public LayerMask platformslayerMask;
     // Start is called before the first frame update
     void Start()
@@ -28,8 +29,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        sr.flipX = Input.GetAxis("Horizontal") < 0;
-        //Debug.Log(anim.GetCurrentAnimatorStateInfo(0).IsName("Jump"));
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Jump") &&
             anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
@@ -41,37 +40,55 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("Landing?", false);
         }
 
-        if (isGrounded())
+        if (canMove)
         {
-            if (hasJumped)
+            if (Input.GetAxis("Horizontal") != 0)
             {
-                anim.SetBool("Landing?", true);
+                anim.SetBool("Walking?", true);
             }
+            else
+            {
+                anim.SetBool("Walking?", false);
+            }
+            sr.flipX = Input.GetAxis("Horizontal") < 0;
+            var hs = (Input.GetAxis("Horizontal") * 1.5f * playerSpeed);
+            rb.velocity = new Vector2(hs, rb.velocity.y);
+            if (isGrounded())
+            {
+                if (hasJumped)
+                {
+                    anim.SetBool("Landing?", true);
+                }
 
-            numJumps = 0;
-            hasJumped = false;
-        }
-        else if (numJumps == 0)
-        { //walked off edge
-            numJumps += 1;
-        }
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
-        && numJumps < maxJumps)
-        {
-            anim.SetBool("Jumping?", true);
-            numJumps += 1;
-            rb.velocity = new Vector2(rb.velocity.x, jumpVelocity);
-            hasJumped = true;
-        }
-        if (Input.GetAxis("Horizontal") != 0)
-        {
-            anim.SetBool("Walking?", true);
+                numJumps = 0;
+                hasJumped = false;
+            }
+            else if (numJumps == 0)
+            { //walked off edge
+                numJumps += 1;
+            }
+            if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+            && numJumps < maxJumps)
+            {
+                anim.SetBool("Jumping?", true);
+                numJumps += 1;
+                rb.velocity = new Vector2(rb.velocity.x, jumpVelocity);
+                hasJumped = true;
+            }
         }
         else
         {
             anim.SetBool("Walking?", false);
         }
-        rb.velocity = new Vector2((Input.GetAxis("Horizontal") * 1.5f * playerSpeed), rb.velocity.y);
+
+        //Debug.Log(anim.GetCurrentAnimatorStateInfo(0).IsName("Jump"));
+
+
+
+
+
+
+
 
 
 
@@ -85,6 +102,31 @@ public class PlayerController : MonoBehaviour
         return raycastHit2d.collider != null;
     }
 
+    private void OnCollisionEnter2D(Collision2D other)
+    {
 
+        if (other.gameObject.tag == "Enemy")
+        {
 
+            Vector3 dir = (other.gameObject.transform.position - player.transform.position).normalized;
+            //Debug.Log(dir.y);
+            if (dir.y > 0)
+            {
+                canMove = false;
+                moveStopTime = Time.time;
+                rb.velocity = new Vector2(-dir.x * 12, 7);
+                Invoke(nameof(EnableMove), 0.5f);
+            }
+
+        }
+
+    }
+    private void EnableMove()
+    {
+        canMove = true;
+    }
 }
+
+
+
+
