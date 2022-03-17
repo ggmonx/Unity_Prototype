@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetBool("Jumping?", false);
         }
-        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Jump") &&
+        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Land") &&
             anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
             anim.SetBool("Landing?", false);
@@ -51,10 +51,11 @@ public class PlayerController : MonoBehaviour
             numJumps = 0;
             hasJumped = false;
         }
-        else if (numJumps==0){ //walked off edge
-            numJumps+=1;
+        else if (numJumps == 0)
+        { //walked off edge
+            numJumps += 1;
         }
-        if ( (Input.GetKeyDown(KeyCode.Space)||Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) 
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         && numJumps < maxJumps)
         {
             anim.SetBool("Jumping?", true);
