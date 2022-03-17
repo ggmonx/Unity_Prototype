@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         sr.flipX = Input.GetAxis("Horizontal") < 0;
-        Debug.Log(anim.GetCurrentAnimatorStateInfo(0));
+        //Debug.Log(anim.GetCurrentAnimatorStateInfo(0).IsName("Jump"));
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Jump") &&
             anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
@@ -63,9 +63,13 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpVelocity);
             hasJumped = true;
         }
+        if (Input.GetAxis("Horizontal") != 0)
+        {
+            anim.SetBool("Walking?", true);
+        }
         else
         {
-            //anim.SetBool("Attacking?", false);
+            anim.SetBool("Walking?", false);
         }
         rb.velocity = new Vector2((Input.GetAxis("Horizontal") * 1.5f * playerSpeed), rb.velocity.y);
 
