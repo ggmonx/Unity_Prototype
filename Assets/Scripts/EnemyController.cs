@@ -16,22 +16,5 @@ public class EnemyController : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
 
-        if (other.gameObject.tag == "Player")
-        {
-            Vector3 dir = (other.gameObject.transform.position - enemy.transform.position).normalized;
-            var rb = other.gameObject.GetComponent<Rigidbody2D>();
-            if (dir.y > 0)
-            {
-                // hit top
-                rb.velocity = new Vector2(0, 5);
-                Destroy(enemy);
-
-            }
-
-        }
-
-    }
 }

@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private float moveStopTime;
     private bool canMove = true;
     public LayerMask platformslayerMask;
+    [SerializeField] GameObject atkHitbox;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +30,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey(KeyCode.S))
+        {
+            atkHitbox.GetComponent<BoxCollider2D>().enabled = true;
+        }
+        else
+        {
+            atkHitbox.GetComponent<BoxCollider2D>().enabled = false;
+        }
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Jump") &&
             anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
@@ -51,7 +60,7 @@ public class PlayerController : MonoBehaviour
                 anim.SetBool("Walking?", false);
             }
             sr.flipX = Input.GetAxis("Horizontal") < 0;
-            var hs = (Input.GetAxis("Horizontal") * 1.5f * playerSpeed);
+            var hs = (Input.GetAxis("Horizontal") * playerSpeed);
             rb.velocity = new Vector2(hs, rb.velocity.y);
             if (isGrounded())
             {
@@ -72,7 +81,7 @@ public class PlayerController : MonoBehaviour
             {
                 anim.SetBool("Jumping?", true);
                 numJumps += 1;
-                rb.velocity = new Vector2(rb.velocity.x, jumpVelocity);
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y <= 0 ? jumpVelocity : rb.velocity.y + jumpVelocity);
                 hasJumped = true;
             }
         }
@@ -104,19 +113,25 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-
-        if (other.gameObject.tag == "Enemy")
+        if (other.collider.tag == "Enemy" && other.otherCollider.tag != "AtkHitbox")
         {
 
-            Vector3 dir = (other.gameObject.transform.position - player.transform.position).normalized;
+            Vector3 dir = (player.transform.position - other.gameObject.transform.position).normalized;
             //Debug.Log(dir.y);
-            if (dir.y > 0)
+            if (dir.y < 0.65)
             {
                 canMove = false;
                 moveStopTime = Time.time;
-                rb.velocity = new Vector2(-dir.x * 12, 7);
+                rb.velocity = new Vector2(dir.x * 12, 7);
                 Invoke(nameof(EnableMove), 0.5f);
             }
+            else
+            {
+
+                rb.velocity = new Vector2(0, 5);
+                Destroy(other.gameObject);
+            }
+
 
         }
 
