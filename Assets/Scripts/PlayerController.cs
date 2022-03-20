@@ -129,7 +129,9 @@ public class PlayerController : MonoBehaviour
             {
 
                 rb.velocity = new Vector2(0, 5);
+                other.gameObject.GetComponent<Collider2D>().enabled = false;
                 other.gameObject.GetComponent<Animator>().SetBool("Dead?", true);
+
                 //
             }
 

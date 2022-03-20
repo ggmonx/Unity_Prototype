@@ -17,11 +17,6 @@ public class EnemyController : MonoBehaviour
     }
 
 
-    private void startDeath()
-    {
-        enemy.GetComponent<Collider2D>().enabled = false;
-    }
-
     private void Die()
     {
         Destroy(enemy);

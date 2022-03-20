@@ -32,7 +32,17 @@ AnimationClip:
     - time: 0.41666666
       value: {fileID: 21300000, guid: 5c55098d4bcc22a4d8f5d98b633dad83, type: 3}
     - time: 0.5
+      value: {fileID: 21300000, guid: 51f331649a4979148bd765ed5eecd78a, type: 3}
+    - time: 0.5833333
       value: {fileID: 21300000, guid: 6ce32080aa85ac442a3d67ab8fc315cd, type: 3}
+    - time: 0.6666667
+      value: {fileID: 21300000, guid: 1541d1a072788e743b61e6cd30a4e2f8, type: 3}
+    - time: 0.75
+      value: {fileID: 21300000, guid: b7aa358c3364a644394914b4f6fc1be0, type: 3}
+    - time: 0.8333333
+      value: {fileID: 21300000, guid: cf38f762cb014604d92b29687922ca63, type: 3}
+    - time: 0.9166667
+      value: {fileID: 21300000, guid: 1fe5d0ed6bb992e4397764ad3ff85d2a, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -58,18 +68,23 @@ AnimationClip:
     - {fileID: 21300000, guid: 11dc5f8e50ec99c4daa3459dc521b782, type: 3}
     - {fileID: 21300000, guid: 925a1bfda60fda4418852a1cb6115d3d, type: 3}
     - {fileID: 21300000, guid: 5c55098d4bcc22a4d8f5d98b633dad83, type: 3}
+    - {fileID: 21300000, guid: 51f331649a4979148bd765ed5eecd78a, type: 3}
     - {fileID: 21300000, guid: 6ce32080aa85ac442a3d67ab8fc315cd, type: 3}
+    - {fileID: 21300000, guid: 1541d1a072788e743b61e6cd30a4e2f8, type: 3}
+    - {fileID: 21300000, guid: b7aa358c3364a644394914b4f6fc1be0, type: 3}
+    - {fileID: 21300000, guid: cf38f762cb014604d92b29687922ca63, type: 3}
+    - {fileID: 21300000, guid: 1fe5d0ed6bb992e4397764ad3ff85d2a, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.5833333
+    m_StopTime: 1
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
     m_HasAdditiveReferencePose: 0
-    m_LoopTime: 0
+    m_LoopTime: 1
     m_LoopBlend: 0
     m_LoopBlendOrientation: 0
     m_LoopBlendPositionY: 0
@@ -84,14 +99,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0
-    functionName: startDeath
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.5
+  - time: 0.9166667
     functionName: Die
     data: 
     objectReferenceParameter: {fileID: 0}
