@@ -129,7 +129,8 @@ public class PlayerController : MonoBehaviour
             {
 
                 rb.velocity = new Vector2(0, 5);
-                Destroy(other.gameObject);
+                other.gameObject.GetComponent<Animator>().SetBool("Dead?", true);
+                //
             }
 
 
