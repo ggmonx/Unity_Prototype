@@ -17,10 +17,12 @@ public class AtkHitBox : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log(other.collider.tag);
+        //Debug.Log(other.collider.tag);
         if (other.collider.tag == "Enemy")
         {
-            Destroy(other.gameObject);
+            other.gameObject.GetComponent<Collider2D>().enabled = false;
+            other.gameObject.GetComponent<Animator>().SetBool("Dead?", true);
+            //Destroy(other.gameObject);
         }
         else if (other.collider.tag == "Player")
         {

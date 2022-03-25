@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
         sr = player.GetComponent<SpriteRenderer>();
         boxCollider2D = player.GetComponent<BoxCollider2D>();
         anim = player.GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
