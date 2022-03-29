@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -31,14 +32,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.S))
-        {
-            atkHitbox.GetComponent<BoxCollider2D>().enabled = true;
-        }
-        else
-        {
-            atkHitbox.GetComponent<BoxCollider2D>().enabled = false;
-        }
+        //Attack();
+
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Jump") &&
             anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
@@ -143,6 +138,27 @@ public class PlayerController : MonoBehaviour
     private void EnableMove()
     {
         canMove = true;
+    }
+
+    private void Attack()
+    {
+        if (Input.GetKey(KeyCode.S))
+        {
+            atkHitbox.GetComponent<BoxCollider2D>().enabled = true;
+        }
+        else
+        {
+            atkHitbox.GetComponent<BoxCollider2D>().enabled = false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "KillZone")
+        {
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 }
 
