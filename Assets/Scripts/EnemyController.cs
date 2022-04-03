@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] private GameObject enemy;
     void Start()
     {
     }
