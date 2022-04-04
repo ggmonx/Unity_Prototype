@@ -8,6 +8,7 @@ TagManager:
   - AtkHitbox
   - KillZone
   - teleporter
+  - platform
   layers:
   - Default
   - TransparentFX
