@@ -12,6 +12,7 @@ public class EnemyController : MonoBehaviour
     private Vector3 lastPosition;
     private const float dirInterval = 0.5f;
     private float lastCheckTime;
+    private Animator animator;
 
 
     // Start is called before the first frame update
@@ -20,6 +21,7 @@ public class EnemyController : MonoBehaviour
         rb = this.GetComponent<Rigidbody2D>();
         sr = this.GetComponent<SpriteRenderer>();
         bc = this.GetComponent<BoxCollider2D>();
+        animator = this.GetComponent<Animator>();
         platformslayerMask = LayerMask.GetMask("Platforms");
         lastPosition = rb.transform.position;
         lastCheckTime = Time.time;
@@ -44,17 +46,26 @@ public class EnemyController : MonoBehaviour
             lastPosition = rb.transform.position;
         }
 
+        if (animator.GetBool("Dead?") == false)
+        {
+            rb.velocity = new Vector2(5 * (direction), rb.velocity.y);
+            sr.flipX = rb.velocity.x < 0;
+        }
+        else
+        {
+            rb.gravityScale = 0;
+        }
 
-        rb.velocity = new Vector2(5 * (direction), rb.velocity.y);
-        sr.flipX = rb.velocity.x < 0;
 
     }
 
     private bool isGrounded()
     {
-        RaycastHit2D raycastHit2d = Physics2D.BoxCast(bc.bounds.center,
-             bc.bounds.size, 0f, Vector2.down + (sr.flipX ? Vector2.left : Vector2.right), 1f, platformslayerMask);
-        Debug.DrawLine(bc.bounds.center, raycastHit2d.point + raycastHit2d.normal, Color.blue, 30, false);
+        const float extentMultiplier = 1.8f;
+        RaycastHit2D raycastHit2d = Physics2D.BoxCast(bc.bounds.center +
+         new Vector3(bc.bounds.extents.x * (sr.flipX ? -extentMultiplier : extentMultiplier), 0, 0),
+             bc.bounds.size, 0f, Vector2.down + (sr.flipX ? Vector2.left : Vector2.right), 0.1f, platformslayerMask);
+
         return raycastHit2d.collider != null;
     }
 

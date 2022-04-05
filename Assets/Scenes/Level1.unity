@@ -385,7 +385,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.41332978, y: 0}
+  m_Offset: {x: -0.32461476, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -396,7 +396,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.5286002, y: 5.12}
+  m_Size: {x: 3.35117, y: 5.12}
   m_EdgeRadius: 0
 --- !u!114 &252761158
 MonoBehaviour:
@@ -559,7 +559,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.41332978, y: 0}
+  m_Offset: {x: -0.29260123, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -570,7 +570,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.5286002, y: 5.12}
+  m_Size: {x: 3.287143, y: 5.12}
   m_EdgeRadius: 0
 --- !u!95 &415195512
 Animator:
@@ -733,7 +733,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 468469184}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.83, y: -0.17, z: 0}
+  m_LocalPosition: {x: -3.83, y: -0.17, z: 1}
   m_LocalScale: {x: 0.9294041, y: 0.93132174, z: 0.9005}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1758,7 +1758,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2000686077}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.18, y: 1.41, z: 1}
+  m_LocalPosition: {x: -9.18, y: 1.41, z: 0}
   m_LocalScale: {x: 0.21094072, y: 0.21490254, z: 1}
   m_Children:
   - {fileID: 519420032}
@@ -1982,7 +1982,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.41332978, y: 0}
+  m_Offset: {x: -0.35418642, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1993,7 +1993,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.5286002, y: 5.12}
+  m_Size: {x: 3.4103134, y: 5.12}
   m_EdgeRadius: 0
 --- !u!95 &2107835186
 Animator:
