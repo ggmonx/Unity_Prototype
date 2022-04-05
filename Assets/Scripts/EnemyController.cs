@@ -29,10 +29,10 @@ public class EnemyController : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
-        if (!isGrounded() || ((Time.time - lastCheckTime) >= dirInterval && lastPosition == rb.transform.position))
+        if (!isGrounded() || lastPosition == rb.transform.position)
         {
 
             direction *= -1;
@@ -40,7 +40,7 @@ public class EnemyController : MonoBehaviour
             lastPosition = rb.transform.position;
 
         }
-        if (((Time.time - lastCheckTime) >= dirInterval))
+        else if (((Time.time - lastCheckTime) >= dirInterval))
         {// periodically update the position and check time
             lastCheckTime = Time.time;
             lastPosition = rb.transform.position;
