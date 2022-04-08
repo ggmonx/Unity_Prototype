@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    public float playerSpeed;
+    private float playerSpeed = 7;
     public float jumpVelocity;
     private bool hasJumped = false;
     public int maxJumps;
@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded()
     {
         RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2D.bounds.center,
-             boxCollider2D.bounds.size, 0f, Vector2.down, .1f, platformslayerMask); 
+             boxCollider2D.bounds.size, 0f, Vector2.down, .1f, platformslayerMask);
         //Debug.Log(raycastHit2d.collider);
         return raycastHit2d.collider != null;
     }
