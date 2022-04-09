@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private bool canMove = true;
     public LayerMask platformslayerMask;
     [SerializeField] GameObject atkHitbox;
+    private bool ignoreEnemy = false;
 
     // Start is called before the first frame update
 
@@ -119,22 +120,28 @@ public class PlayerController : MonoBehaviour
 
             Vector3 dir = (player.transform.position - other.gameObject.transform.position).normalized;
             //Debug.Log(dir.y);
-            if (dir.y < 0.65 && Mathf.Abs(dir.x) > 0.3)
+            if (!ignoreEnemy)
             {
-                canMove = false;
-                moveStopTime = Time.time;
-                rb.velocity = new Vector2(dir.x * 12, 7);
-                Invoke(nameof(EnableMove), 0.5f);
-            }
-            else
-            {
-                Debug.Log(Mathf.Abs(dir.x));
-                rb.velocity = new Vector2(0, 5);
-                other.gameObject.GetComponent<Collider2D>().enabled = false;
-                other.gameObject.GetComponent<Animator>().SetBool("Dead?", true);
+                if (dir.y < 0.65 && Mathf.Abs(dir.x) > 0.3)
+                {
+                    ignoreEnemy = true;
+                    canMove = false;
+                    moveStopTime = Time.time;
+                    rb.velocity = new Vector2(dir.x * 12, 7);
+                    Invoke(nameof(EnableMove), 0.5f);
+                    Invoke(nameof(EnableEnemyHit), 0.5f);
+                }
+                else
+                {
+                    Debug.Log(Mathf.Abs(dir.x));
+                    rb.velocity = new Vector2(0, 5);
+                    other.gameObject.GetComponent<Collider2D>().enabled = false;
+                    other.gameObject.GetComponent<Animator>().SetBool("Dead?", true);
 
-                //
+                    //
+                }
             }
+
 
 
         }
@@ -143,6 +150,10 @@ public class PlayerController : MonoBehaviour
     private void EnableMove()
     {
         canMove = true;
+    }
+    private void EnableEnemyHit()
+    {
+        ignoreEnemy = false;
     }
 
     private void Attack()

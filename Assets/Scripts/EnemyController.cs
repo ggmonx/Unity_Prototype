@@ -84,6 +84,20 @@ public class EnemyController : MonoBehaviour
 
             shouldTurn = true;
         }
+        else if (other.collider.tag == "Player")
+        {
+            Physics2D.IgnoreCollision(other.collider, other.otherCollider, true);
+            IEnumerator co = enableCollision(other.collider, other.otherCollider);
+            StartCoroutine(co);
+
+        }
+    }
+
+    IEnumerator enableCollision(Collider2D col1, Collider2D col2)
+    {
+
+        yield return new WaitForSeconds(1f);
+        Physics2D.IgnoreCollision(col1, col2, false);
     }
 
 
