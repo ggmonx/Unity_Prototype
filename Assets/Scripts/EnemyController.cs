@@ -13,6 +13,7 @@ public class EnemyController : MonoBehaviour
     private const float dirInterval = 0.5f;
     private float lastCheckTime;
     private Animator animator;
+    private bool shouldTurn = false;
 
 
     // Start is called before the first frame update
@@ -32,9 +33,9 @@ public class EnemyController : MonoBehaviour
     void FixedUpdate()
     {
 
-        if (!isGrounded() || lastPosition == rb.transform.position)
+        if (!isGrounded() || lastPosition == rb.transform.position || shouldTurn)
         {
-
+            shouldTurn = false;
             direction *= -1;
             lastCheckTime = Time.time;
             lastPosition = rb.transform.position;
@@ -73,6 +74,16 @@ public class EnemyController : MonoBehaviour
     private void Die()
     {
         Destroy(this.gameObject);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+
+        if (other.collider.tag == "Enemy")
+        {
+
+            shouldTurn = true;
+        }
     }
 
 

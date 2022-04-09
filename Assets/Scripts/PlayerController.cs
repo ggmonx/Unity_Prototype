@@ -19,13 +19,17 @@ public class PlayerController : MonoBehaviour
     private bool canMove = true;
     public LayerMask platformslayerMask;
     [SerializeField] GameObject atkHitbox;
+
     // Start is called before the first frame update
+
+
     void Start()
     {
         rb = player.GetComponent<Rigidbody2D>();
         sr = player.GetComponent<SpriteRenderer>();
         boxCollider2D = player.GetComponent<BoxCollider2D>();
         anim = player.GetComponent<Animator>();
+        // Debug.Log(GameInstance.getJumps());
 
     }
 
@@ -75,6 +79,7 @@ public class PlayerController : MonoBehaviour
             if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
             && numJumps < maxJumps)
             {
+                GameInstance.setJumps(GameInstance.getJumps() + 1);
                 anim.SetBool("Jumping?", true);
                 numJumps += 1;
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y <= 0 ? jumpVelocity : rb.velocity.y + jumpVelocity);
@@ -114,7 +119,7 @@ public class PlayerController : MonoBehaviour
 
             Vector3 dir = (player.transform.position - other.gameObject.transform.position).normalized;
             //Debug.Log(dir.y);
-            if (dir.y < 0.65)
+            if (dir.y < 0.65 && Mathf.Abs(dir.x) > 0.3)
             {
                 canMove = false;
                 moveStopTime = Time.time;
@@ -123,7 +128,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-
+                Debug.Log(Mathf.Abs(dir.x));
                 rb.velocity = new Vector2(0, 5);
                 other.gameObject.GetComponent<Collider2D>().enabled = false;
                 other.gameObject.GetComponent<Animator>().SetBool("Dead?", true);
